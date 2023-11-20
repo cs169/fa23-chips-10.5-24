@@ -15,6 +15,8 @@ political events in their area as well as aggregate, share and view news items i
 
 [![Linters](https://github.com/cs169/fa23-chips-10.5-24/actions/workflows/linters.yml/badge.svg)](https://github.com/cs169/fa23-chips-10.5-24/actions/workflows/linters.yml)
 
+[![Bluejay Dashboard](https://img.shields.io/badge/Bluejay-Dashboard_24-blue.svg)](http://dashboard.bluejay.governify.io/dashboard/script/dashboardLoader.js?dashboardURL=https://reporter.bluejay.governify.io/api/v4/dashboards/tpa-CS169-2023-GH-cs169_fa23-chips-10.5-24/main)
+
 ### Getting Setup Locally
 
 Follow the [Getting Started Guide](./docs/01-getting-started.md) to get your localhost environment setup.
