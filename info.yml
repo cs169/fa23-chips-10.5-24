@@ -11,14 +11,14 @@ project:
       surname: 'Zhang' 
       githubUsername: 'WAAutoMaton'
     member2:
-      name: ''
-      surname: 'Fernandez' 
+      name: 'Jiajun'
+      surname: 'Cheng' 
       githubUsername: 'KashunCheng'
     member3:
-      name: 'XXXXXXXXXXX'
-      surname: 'XXXXXXXXXXX' 
+      name: 'Steven'
+      surname: 'Guo' 
       githubUsername: 'segwaysteve'
     member4:
-      name: 'XXXXXXXXXXX'
-      surname: 'XXXXXXXXXXX' 
+      name: 'Alton'
+      surname: 'Sturgis' 
       githubUsername: 'stuurge'
