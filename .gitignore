@@ -79,3 +79,25 @@ yarn-debug.log*
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# WAAutoMaton's gitignore
+.bundle
+.config
+.local
+.idea
+.vscode-server
+.gnupg
+.ssh
+.gitconfig
+.dotnet
+run.fish
+coverage
+.gem
+.bash_history
+.nvm
+.cache
+.bashrc
+.yarnrc
+.node_repl_history
+.viminfo
+
