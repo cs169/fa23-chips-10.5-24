@@ -22,11 +22,11 @@ class Representative < ApplicationRecord
       address_state = official.address ? official.address[0].state : nil
       address_zip = official.address ? official.address[0].zip : nil
 
-      rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
+      rep = Representative.where(name: official.name, ocdid: ocdid_temp,
         title: title_temp, 
         address_line1: address_line1, address_line2: address_line2, 
         address_city: address_city, address_state: address_state,
-        address_zip: address_zip, party: official.party, photo_url: official.photo_url})
+        address_zip: address_zip, party: official.party, photo_url: official.photo_url).first_or_create
       reps.push(rep)
     end
 
