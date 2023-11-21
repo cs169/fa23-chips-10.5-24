@@ -16,20 +16,27 @@ class Representative < ApplicationRecord
           ocdid_temp = office.division_id
         end
       end
-      address_line1 = official.address ? official.address[0].line1 : nil
-      address_line2 = official.address ? official.address[0].line2 : nil
-      address_city = official.address ? official.address[0].city : nil
-      address_state = official.address ? official.address[0].state : nil
-      address_zip = official.address ? official.address[0].zip : nil
-
-      rep = Representative.where(name: official.name, ocdid: ocdid_temp,
-                                 title: title_temp,
-                                 address_line1: address_line1, address_line2: address_line2,
-                                 address_city: address_city, address_state: address_state,
-                                 address_zip: address_zip, party: official.party, photo_url: official.photo_url).first_or_create
-      reps.push(rep)
+      reps.push(create_representative(official, title_temp, ocdid_temp))
     end
 
     reps
+  end
+
+  def self.create_representative(official, title, ocdid)
+    address = official.address ? official.address[0] : nil
+    address_line1, address_line2, address_city, address_state, address_zip = extract_address(address)
+    Representative.where(name: official.name, ocdid: ocdid, title: title,
+                         address_line1: address_line1, address_line2: address_line2,
+                         address_city: address_city, address_state: address_state,
+                         address_zip: address_zip, party: official.party,
+                         photo_url: official.photo_url).first_or_create
+  end
+
+  def self.extract_address(address)
+    if address
+      [address.line1, address.line2, address.city, address.state, address.zip]
+    else
+      [nil, nil, nil, nil, nil]
+    end
   end
 end

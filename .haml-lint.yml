@@ -10,4 +10,5 @@ linters:
 exclude:
     - 'node_modules/**/*'
     - 'vendor/**/*'
+    - '.vscode-server/**/*'
 
