@@ -12,13 +12,17 @@
       <%= image_tag(@representative.photo_url, alt: @representative.name) %>
     <% end %>
     <h2><%= @representative.name %></h2>
+    <% unless @representative.title.nil? %>
+        <p>Title: <%= @representative.title%></p>
+    <% end %>
+    <% unless @representative.party.nil? %>
+        <p>Party: <%= @representative.party%></p>
+    <% end %>
     <% unless @representative.address_line1.nil? %>
-        <p><%= @representative.address_line1 %></p>
-        <br>
+        <p>Address line 1: <%= @representative.address_line1 %></p>
     <% end %>
     <% unless @representative.address_line2.nil? %>
-      <p><%= @representative.address_line2 %></p>
-      <br>
+      <p>Address Line 2: <%= @representative.address_line2 %></p>
     <% end %>
     <% unless @representative.address_city.nil? and @representative.address_state.nil? and @representative.address_zip.nil? %>
       <p><%= @representative.address_city %>,<%= @representative.address_state %>, <%= @representative.address_zip %></p>
