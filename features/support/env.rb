@@ -9,9 +9,7 @@
 # See: https://github.com/codecov/example-ruby
 
 require 'simplecov'
-SimpleCov.start 'rails' do
-  add_filter 'lib'
-end
+SimpleCov.start 'rails'
 
 if ENV['CI']
   require 'codecov'
