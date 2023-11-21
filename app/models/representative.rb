@@ -17,8 +17,8 @@ class Representative < ApplicationRecord
         end
       end
 
-      rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
-          title: title_temp })
+      rep = Representative.where(name: official.name, ocdid: ocdid_temp,
+                                 title: title_temp).first_or_create
       reps.push(rep)
     end
 
