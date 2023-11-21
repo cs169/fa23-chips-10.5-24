@@ -23,10 +23,10 @@ class Representative < ApplicationRecord
       address_zip = official.address ? official.address[0].zip : nil
 
       rep = Representative.where(name: official.name, ocdid: ocdid_temp,
-        title: title_temp, 
-        address_line1: address_line1, address_line2: address_line2, 
-        address_city: address_city, address_state: address_state,
-        address_zip: address_zip, party: official.party, photo_url: official.photo_url).first_or_create
+                                 title: title_temp,
+                                 address_line1: address_line1, address_line2: address_line2,
+                                 address_city: address_city, address_state: address_state,
+                                 address_zip: address_zip, party: official.party, photo_url: official.photo_url).first_or_create
       reps.push(rep)
     end
 
