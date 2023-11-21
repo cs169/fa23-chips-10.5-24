@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile Page</title>
+    <!-- Add any necessary CSS stylesheets or external libraries here -->
+</head>
+<body>
+    <h1>Profile Page</h1>
+    
+    <!-- Display the representative's information here -->
+    <% unless @representative.photo_url.nil? %>
+      <%= image_tag(@representative.photo_url, alt: @representative.name) %>
+    <% end %>
+    <h2><%= @representative.name %></h2>
+    <% unless @representative.address_line1.nil? %>
+        <p><%= @representative.address_line1 %></p>
+        <br>
+    <% end %>
+    <% unless @representative.address_line2.nil? %>
+      <p><%= @representative.address_line2 %></p>
+      <br>
+    <% end %>
+    <% unless @representative.address_city.nil? and @representative.address_state.nil? and @representative.address_zip.nil? %>
+      <p><%= @representative.address_city %>,<%= @representative.address_state %>, <%= @representative.address_zip %></p>
+    <% end %>
+    <!-- Add more information as needed -->
+    
+    <!-- Add any additional sections or components as needed -->
+</body>
+</html>
