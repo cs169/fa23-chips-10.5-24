@@ -37,6 +37,7 @@ jobs:
       - run: yarn install
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:test:prepare
+      - run: EDITOR=vim bundle exec rails credentials:edit
       - run: bundle exec rspec
         env:
             CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
