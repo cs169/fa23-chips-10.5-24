@@ -8,11 +8,8 @@ RSpec.describe MapController, type: :controller do
   let!(:county) { create(:county, state: state, fips_code: '12345') }
 
   describe 'GET #index' do
-    before do
-      get :index
-    end
-
     it 'responds as successful' do
+      get :index
       expect(response).to be_successful
     end
   end
@@ -27,22 +24,22 @@ RSpec.describe MapController, type: :controller do
   end
 
   describe 'GET #county' do
-    context 'when state and county exist' do
+    describe 'state and county exist' do
       it 'redirects to search representatives path' do
         get :county, params: { state_symbol: 'CA', std_fips_code: '12345' }
         expect(response).to redirect_to(search_representatives_path(address: county.name))
       end
     end
 
-    context 'when state does not exist' do
-      it 'redirects to root with an error message' do
+    describe 'state does not exist' do
+      it 'redirects to root' do
         get :county, params: { state_symbol: 'XX', std_fips_code: '12345' }
         expect(response).to redirect_to(root_path)
       end
     end
 
-    context 'when county does not exist' do
-      it 'redirects to root with an error message' do
+    describe 'county does not exist' do
+      it 'redirects to root' do
         get :county, params: { state_symbol: 'CA', std_fips_code: '99999' }
         expect(response).to redirect_to(root_path)
       end

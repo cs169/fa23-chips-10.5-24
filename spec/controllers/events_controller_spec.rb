@@ -25,13 +25,11 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe 'GET #show' do
-    describe 'the event exists' do
-      let(:event) { events.first }
+    let(:event) { events.first }
 
-      it 'responds as successful' do
-        get :show, params: { id: event.id }
-        expect(response).to be_successful
-      end
+    it 'responds as successful' do
+      get :show, params: { id: event.id }
+      expect(response).to be_successful
     end
   end
 end
