@@ -14,12 +14,12 @@ RSpec.describe EventsController, type: :controller do
     end
 
     it 'assigns events filtered by state to @events' do
-      get :index, params: { 'filter-by': 'state-only', 'state': 'CA' }
+      get :index, params: { 'filter-by': 'state-only', state: 'CA' }
       expect(assigns(:events)).to match_array(events)
     end
 
     it 'assigns events filtered by county to @events' do
-      get :index, params: { 'filter-by': 'state-county', 'state': 'CA', 'county': '12345' }
+      get :index, params: { 'filter-by': 'state-county', state: 'CA', county: '12345' }
       expect(assigns(:events)).to match_array(events)
     end
   end
