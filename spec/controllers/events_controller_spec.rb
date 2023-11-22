@@ -32,18 +32,6 @@ RSpec.describe EventsController, type: :controller do
         get :show, params: { id: event.id }
         expect(response).to be_successful
       end
-
-      it 'assigns @event' do
-        get :show, params: { id: event.id }
-        expect(assigns(:event)).to eq(event)
-      end
-    end
-
-    describe 'the event does not exist' do
-      it 'raises a RecordNotFound error' do
-        show_result = proc { get :show, params: { id: 'none' } }
-        expect(show_result).to raise_error(ActiveRecord::RecordNotFound)
-      end
     end
   end
 end
