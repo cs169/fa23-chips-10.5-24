@@ -6,7 +6,6 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'support', 'pat
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'support', 'selectors'))
 
 def expect_display_type(display_type, name)
-  puts("path[data-#{display_type}-name=\"#{name}\"]")
   expect(page).to have_css("path[data-#{display_type}-name=\"#{name}\"]")
 end
 
