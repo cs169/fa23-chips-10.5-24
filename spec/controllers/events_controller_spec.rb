@@ -8,17 +8,17 @@ RSpec.describe EventsController, type: :controller do
   let!(:events) { create_list(:event, 3, county: county) }
 
   describe 'GET #index' do
-    it 'assigns all events to @events' do
+    it 'assigns @events' do
       get :index
       expect(assigns(:events)).to match_array(Event.all)
     end
 
-    it 'assigns events filtered by state to @events' do
+    it 'assigns @events filtered by state' do
       get :index, params: { 'filter-by': 'state-only', state: 'CA' }
       expect(assigns(:events)).to match_array(events)
     end
 
-    it 'assigns events filtered by county to @events' do
+    it 'assigns @events filtered by county' do
       get :index, params: { 'filter-by': 'state-county', state: 'CA', county: '12345' }
       expect(assigns(:events)).to match_array(events)
     end
@@ -33,7 +33,7 @@ RSpec.describe EventsController, type: :controller do
         expect(response).to be_successful
       end
 
-      it 'assigns the requested event to @event' do
+      it 'assigns @event' do
         get :show, params: { id: event.id }
         expect(assigns(:event)).to eq(event)
       end
@@ -41,7 +41,7 @@ RSpec.describe EventsController, type: :controller do
 
     describe 'the event does not exist' do
       it 'raises a RecordNotFound error' do
-        show_result = proc { get :show, params: { id: 'nonexistent' } }
+        show_result = proc { get :show, params: { id: 'none' } }
         expect(show_result).to raise_error(ActiveRecord::RecordNotFound)
       end
     end
