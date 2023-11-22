@@ -5,15 +5,12 @@ Feature: US Map Interaction
   So that I can see a zoomed-in view of the counties within that state
   And see a list of the county representatives
 
-Background: Stay on the home page
-  Given I am on the home page
-  And I can see a state such as "California"
+Background: On the page showing the map of the state "California"
+  Given I am on the page showing the map of the state "California"
+  And I can see a county such as "Alameda County"
 
-Scenario: Clicking on a state to zoom in
-  When I click on the state "California"
-  Then the map should zoom in on "California"
-  Then I can see a county such as "Alameda County"
-  Then I click on the county "Alameda County"
+Scenario: Clicking on a county to find representatives
+  When I click on the county "Alameda County"
   Then I should see "Yesenia Sanchez" 
   Then I should see "Alameda County Sheriff-Coroner"
 
