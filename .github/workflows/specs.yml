@@ -43,3 +43,4 @@ jobs:
       - run: bundle exec cucumber
         env:
             CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+            RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
