@@ -51,9 +51,9 @@ ActiveRecord::Schema.define(version: 2023_11_21_043059) do
     t.string "title"
     t.string "address_line1"
     t.string "address_line2"
-    t.string "address_city"
-    t.string "address_state"
-    t.string "address_zip"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
     t.string "party"
     t.string "photo_url"
   end

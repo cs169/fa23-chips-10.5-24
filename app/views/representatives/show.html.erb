@@ -24,8 +24,8 @@
     <% unless @representative.address_line2.nil? %>
       <p>Address Line 2: <%= @representative.address_line2 %></p>
     <% end %>
-    <% unless @representative.address_city.nil? and @representative.address_state.nil? and @representative.address_zip.nil? %>
-      <p><%= @representative.address_city %>,<%= @representative.address_state %>, <%= @representative.address_zip %></p>
+    <% unless @representative.city.nil? and @representative.state.nil? and @representative.zip.nil? %>
+      <p><%= @representative.city %>, <%= @representative.state %>, <%= @representative.zip %></p>
     <% end %>
     <!-- Add more information as needed -->
     
