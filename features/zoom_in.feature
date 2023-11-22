@@ -12,3 +12,7 @@ Scenario: Clicking on a state to zoom in
   When I click on the state "California"
   Then the map should zoom in on "California"
   Then I can see a county such as "Alameda County"
+
+Scenario: Visit a page describing a non-existing state
+  When I am on the page showing the map of the state "CB"
+  Then I should see "State 'CB' not found."

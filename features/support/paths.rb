@@ -21,8 +21,10 @@ module NavigationHelpers
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
-    when /^the page showing the map of the state "California"$/
-      '/state/CA'
+    when /^the page showing the map of the state "([^"]+)"$/
+      "/state/#{$1}"
+    when /^the page showing the map of the county "([^"]+)" with id "([^"]+)" under "([^"]+)"$/
+      "/state/#{$3}/county/#{$2}"
     else
       begin
         page_name =~ /^the (.*) page$/
