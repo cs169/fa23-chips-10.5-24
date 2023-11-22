@@ -29,6 +29,8 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - run: sudo apt update
+      - run: sudo apt install -y chromium-browser chromium-chromedriver
       - run: gem install bundler:2.1.4
       - run: npm install -g yarn@1.22.19
       - run: bundle install
@@ -36,4 +38,8 @@ jobs:
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:test:prepare
       - run: bundle exec rspec
+        env:
+            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - run: bundle exec cucumber
+        env:
+            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
