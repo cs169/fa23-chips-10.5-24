@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'return correct instance methods' do
-    let(:user) { FactoryBot.create(:user, first_name: 'John', last_name: 'Doe', provider: 1) }
+    let(:user) { create(:user, first_name: 'John', last_name: 'Doe', provider: 1) }
 
     describe '#name' do
       it 'returns the full name of the user' do
@@ -25,13 +25,13 @@ RSpec.describe User, type: :model do
 
     describe '.find_google_user' do
       it 'finds the user with Google OAuth2 provider' do
-        expect(User.find_google_user('123')).to eq(google_user)
+        expect(described_class.find_google_user('123')).to eq(google_user)
       end
     end
 
     describe '.find_github_user' do
       it 'finds the user with GitHub provider' do
-        expect(User.find_github_user('456')).to eq(github_user)
+        expect(described_class.find_github_user('456')).to eq(github_user)
       end
     end
   end
