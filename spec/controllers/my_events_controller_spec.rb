@@ -9,25 +9,24 @@ RSpec.describe MyEventsController, type: :controller do
   let(:event) { create(:event, valid_attributes) }
 
   describe 'GET #new' do
-    it 'assigns a new event to @event' do
+    it 'assigns new @event' do
       get :new
       expect(assigns(:event)).to be_a_new(Event)
     end
   end
 
   describe 'GET #edit' do
-    it 'assigns the requested event to @event' do
+    it 'assigns requested @event' do
       get :edit, params: { id: event.id }
       expect(assigns(:event)).to eq(event)
     end
   end
 
   describe 'POST #create' do
-    context 'with valid params' do
+    describe 'using valid attributes' do
       it 'creates a new Event' do
-        expect {
-          post :create, params: { event: valid_attributes }
-        }.to change(Event, :count).by(1)
+        create_result = proc { post :create, params: { event: valid_attributes } }
+        expect(create_result).to change(Event, :count).by(1)
       end
 
       it 'redirects to the events list' do
@@ -37,11 +36,10 @@ RSpec.describe MyEventsController, type: :controller do
       end
     end
 
-    context 'with invalid params' do
+    describe 'using invalid attributes' do
       it 'does not create a new Event' do
-        expect {
-          post :create, params: { event: invalid_attributes }
-        }.to change(Event, :count).by(0)
+        create_result = proc { post :create, params: { event: valid_attributes } }
+        expect(create_result).not_to change(Event, :count)
       end
 
       it 'renders the :new template' do
@@ -52,7 +50,7 @@ RSpec.describe MyEventsController, type: :controller do
   end
 
   describe 'PUT #update' do
-    context 'with valid params' do
+    describe 'using valid attributes' do
       let(:new_attributes) { { name: 'Updated Event Name' } }
 
       it 'updates the requested event' do
@@ -68,7 +66,7 @@ RSpec.describe MyEventsController, type: :controller do
       end
     end
 
-    context 'with invalid params' do
+    describe 'using invalid attributes' do
       it 'does not update the event' do
         original_name = event.name
         put :update, params: { id: event.id, event: invalid_attributes }
@@ -84,11 +82,10 @@ RSpec.describe MyEventsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    it 'destroys the requested event' do
+    it 'destroys the event' do
       event
-      expect {
-        delete :destroy, params: { id: event.id }
-      }.to change(Event, :count).by(-1)
+      delete_result = proc { delete :destroy, params: { id: event.id } }
+      expect(delete_result).to change(Event, :count).by(-1)
     end
 
     it 'redirects to the events list' do
