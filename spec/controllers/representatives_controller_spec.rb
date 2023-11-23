@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe RepresentativesController, type: :controller do
-  let(:representative) { create(:representative) } # assuming you have a factory for representative
+  let(:representative) { create(:representative) }
 
   describe 'GET #show' do
     before do
