@@ -28,11 +28,8 @@ RSpec.describe NewsItem, type: :model do
       expect(described_class.find(news_item.id).rating).to be_nil
     end
 
-    it 'updates the rating when a rating is updated' do
-      expect(rating1).not_to be_nil # Only to make sure the rating is created.
-      expect(rating2).not_to be_nil
-      rating1.update_rating(3)
-      expect(described_class.find(news_item.id).rating).to be_within(0.001).of(2.5)
+    it 'raise error if change rating score' do
+      expect { rating1.update(score: 3) }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
 end
