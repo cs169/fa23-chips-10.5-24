@@ -68,7 +68,7 @@ RSpec.describe LoginController, type: :controller do
 
   describe '#find_or_create_user' do
     let(:user) { create(:user, provider: 'github', uid: '12345') } # Create a user using FactoryBot
-    let(:user_info) { { 'provider' => 'github', 'uid' => '12345', 'info' => { 'name' => 'John Doe' } } }
+    let(:user_info) { { 'provider' => 'github', 'uid' => '12345', 'info' => { 'name' => nil } } }
 
     before do
       allow(controller).to receive(:params).and_return({ user_id: user.id })
@@ -81,6 +81,25 @@ RSpec.describe LoginController, type: :controller do
     it 'creates a new user if one does not exist' do
       user_info['uid'] = '12346' # Change the uid so a new user will be created
       expect { controller.send(:find_or_create_user, user_info, :create_github_user) }.to change(User, :count).by(1)
+    end
+  end
+
+  describe '#create_google_user' do
+    let(:user) { create(:user, provider: 'google_oauth2', uid: '12345') } # Create a user using FactoryBot
+    let(:user_info_google) do
+      { 'provider' => 'google_oauth2', 'uid' => '12345',
+     'info' => { 'first_name' => 'John', 'last_name' => 'Doe', 'email' => '' } }
+    end
+
+    before do
+      allow(controller).to receive(:params).and_return({ user_id: user.id })
+    end
+
+    it 'creates a new user' do
+      user_info_google['uid'] = '12346' # Change the uid so a new user will be created
+      expect do
+        controller.send(:find_or_create_user, user_info_google, :create_google_user)
+      end.to change(User, :count).by(1)
     end
   end
 
