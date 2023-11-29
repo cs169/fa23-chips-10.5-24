@@ -27,5 +27,12 @@ RSpec.describe NewsItem, type: :model do
     it 'returns nil if there are no ratings' do
       expect(described_class.find(news_item.id).rating).to be_nil
     end
+
+    it 'updates the rating when a rating is updated' do
+      expect(rating1).not_to be_nil # Only to make sure the rating is created.
+      expect(rating2).not_to be_nil
+      rating1.update_rating(3)
+      expect(described_class.find(news_item.id).rating).to be_within(0.001).of(2.5)
+    end
   end
 end
