@@ -9,7 +9,7 @@ class MyNewsItemsController < SessionController
 
   def new
     @news_item = NewsItem.new
-    @issue = ""
+    @issue = ''
   end
 
   def edit; end
