@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'news-api'
 class MyNewsItemsController < SessionController
   before_action :set_representative
   before_action :set_representatives_list
@@ -12,7 +13,23 @@ class MyNewsItemsController < SessionController
 
   def edit; end
 
-  def search; end
+  def search
+    newsapi = News.new(Rails.application.credentials[:NEWS_API_KEY])
+    issue = params['issue']
+    articles = newsapi.get_everything(q:        "#{@representative.name} #{issue}",
+                                      sortBy:   'relevancy',
+                                      page:     1,
+                                      pageSize: 5)
+    @news_items = articles.map do |art|
+      NewsItem.new do |news|
+        news.title = art.title
+        news.link = art.url
+        news.description = art.description
+        news.representative_id = @representative.id
+        news.issue = issue
+      end
+    end
+  end
 
   def create
     @news_item = NewsItem.new(news_item_params)

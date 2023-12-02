@@ -1,0 +1,14 @@
+.row.mt-2
+    .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
+        %h1.text-center
+            Edit news article for
+            = link_to @representative.name, representative_path(@representative.id)
+
+    .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
+        = @news_items
+    .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
+        .clearfix.mt-3
+            .float-right
+                = link_to representative_news_items_path(@representative), class: 'btn btn-info' do
+                    View news articles
+                    %i.fas.fa-arrow-right
