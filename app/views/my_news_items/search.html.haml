@@ -1,42 +1,42 @@
 .row.mt-2
-  .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-    %h1.text-center
-      Edit news article for
-      = link_to @representative.name, representative_path(@representative.id)
-  .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-    %b Issue:
-    = @issue
-    %br/
-    %br/
-  - @news_items.each_with_index do |article, index|
     .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-      %label
-        %input{ type: "radio", name: "Title", value: "#{index}" }
-        %b Title:
-        = article.title
+        %h1.text-center
+            Edit news article for
+            = link_to @representative.name, representative_path(@representative.id)
+    .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
+        %b Issue:
+        = @issue
         %br/
-        %b Link:
-        %a{href: article.link, target: "_blank"}= article.link
         %br/
-        %b Description:
-        = article.description
-        %br/
-  %br/
-  %br/
-  .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-    %label{ for: "ratingDropdown" } Rating:
-    %select#ratingDropdown{ name: "rating" }
-      %option{ value: "5" } 5 stars
-      %option{ value: "4" } 4 stars
-      %option{ value: "3" } 3 stars
-      %option{ value: "2" } 2 stars
-      %option{ value: "1" } 1 star
-  .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-    .clearfix.mt-3
-      .float-right
-        = link_to representative_news_items_path(@representative), class: 'btn btn-info' do
-          View news articles
-          %i.fas.fa-arrow-right
-      .float-left
-        = link_to representative_news_items_path(@representative), class: 'btn btn-info' do
-          Save
+    - @news_items.each_with_index do |article, index|
+        .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
+            %label
+            %input{ type: "radio", name: "Title", value: "#{index}" }
+            %b Title:
+            = article.title
+            %br/
+            %b Link:
+            %a{href: article.link, target: "_blank"}= article.link
+            %br/
+            %b Description:
+            = article.description
+            %br/
+    %br/
+    %br/
+    .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
+        %label{ for: "ratingDropdown" } Rating:
+        %select#ratingDropdown{ name: "rating" }
+            %option{ value: "5" } 5 stars
+            %option{ value: "4" } 4 stars
+            %option{ value: "3" } 3 stars
+            %option{ value: "2" } 2 stars
+            %option{ value: "1" } 1 star
+    .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
+        .clearfix.mt-3
+            .float-right
+            = link_to representative_news_items_path(@representative), class: 'btn btn-info' do
+                View news articles
+                %i.fas.fa-arrow-right
+            .float-left
+            = link_to representative_news_items_path(@representative), class: 'btn btn-info' do
+                Save
