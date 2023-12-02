@@ -25,6 +25,12 @@ module NavigationHelpers
       "/state/#{$1}"
     when /^the page showing the map of the county "([^"]+)" with id "([^"]+)" under "([^"]+)"$/
       "/state/#{$3}/county/#{$2}"
+    when /^the news editing page for "([^"]+)"$/
+      begin
+        name = $1
+        representative = Representative.where(name: name).first!
+        "/representatives/#{representative.id}/my_news_item/new"
+      end
     else
       begin
         page_name =~ /^the (.*) page$/

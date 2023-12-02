@@ -76,3 +76,10 @@ end
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
 Capybara.javascript_driver = :selenium_chrome_headless
+
+class ApplicationController < ActionController::Base
+  prepend_before_action :stub_current_user
+  def stub_current_user
+    session[:current_user_id] = cookies[:stub_user_id] if cookies[:stub_user_id]
+  end
+end
