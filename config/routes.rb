@@ -32,6 +32,8 @@ Rails.application.routes.draw do
             :as                                                    => :new_my_news_item
         match '/my_news_item/new', to:  'my_news_items#create',
                                                                       via: [:post]
+        get '/my_news_item/search' => 'my_news_items#search', :as => :search_my_news_item
+
         get '/my_news_item/:id' => 'my_news_items#edit',
             :as                                                    => :edit_my_news_item
         match '/my_news_item/:id', to:  'my_news_items#update',
