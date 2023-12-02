@@ -11,7 +11,7 @@
   - @news_items.each_with_index do |article, index|
     .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
       %label
-        %input{type: "radio", name: "Title", value: "#{index}"}
+        %input{ type: "radio", name: "Title", value: "#{index}" }
         %b Title:
         = article.title
         %br/
@@ -24,13 +24,13 @@
   %br/
   %br/
   .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-    %label{for: "ratingDropdown"} Rating:
-    %select#ratingDropdown{name: "rating"}
-      %option{value: "5"} 5 stars
-      %option{value: "4"} 4 stars
-      %option{value: "3"} 3 stars
-      %option{value: "2"} 2 stars
-      %option{value: "1"} 1 star
+    %label{ for: "ratingDropdown" } Rating:
+    %select#ratingDropdown{ name: "rating" }
+      %option{ value: "5" } 5 stars
+      %option{ value: "4" } 4 stars
+      %option{ value: "3" } 3 stars
+      %option{ value: "2" } 2 stars
+      %option{ value: "1" } 1 star
   .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
     .clearfix.mt-3
       .float-right
