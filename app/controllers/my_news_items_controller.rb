@@ -9,14 +9,15 @@ class MyNewsItemsController < SessionController
 
   def new
     @news_item = NewsItem.new
+    @issue = ""
   end
 
   def edit; end
 
   def search
     newsapi = News.new(Rails.application.credentials[:NEWS_API_KEY])
-    issue = params['issue']
-    articles = newsapi.get_everything(q:        "#{@representative.name} #{issue}",
+    @issue = params['issue']
+    articles = newsapi.get_everything(q:        "#{@representative.name} #{@issue}",
                                       sortBy:   'relevancy',
                                       page:     1,
                                       pageSize: 5)
@@ -26,7 +27,7 @@ class MyNewsItemsController < SessionController
         news.link = art.url
         news.description = art.description
         news.representative_id = @representative.id
-        news.issue = issue
+        news.issue = @issue
       end
     end
   end
