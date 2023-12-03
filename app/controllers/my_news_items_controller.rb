@@ -30,10 +30,22 @@ class MyNewsItemsController < SessionController
         news.issue = @issue
       end
     end
+    session[:news_items] = @news_items.map(&:serializable_hash)
   end
 
   def create
-    @news_item = NewsItem.new(news_item_params)
+    selected_index = params[:news_item_id].to_i
+    selected_article = session[:news_items][selected_index]
+
+    @news_item = NewsItem.new(
+      title: selected_article.title,
+      link: selected_article.link,
+      description: selected_article.description,
+      representative_id: @representative.id,
+      issue: selected_article.issue,
+      rating: params[:rating]
+    )
+
     if @news_item.save
       redirect_to representative_news_item_path(@representative, @news_item),
                   notice: 'News item was successfully created.'
