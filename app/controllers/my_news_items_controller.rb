@@ -7,6 +7,16 @@ class MyNewsItemsController < SessionController
   before_action :set_issues_list
   before_action :set_news_item, only: %i[edit update destroy]
 
+  def create_rating
+    @news_item = NewsItem.find(params[:id])
+    if Rating.exists?(user: @current_user, news_item: @news_item)
+      render json: { error: 'You have already rated this news item' }, status: :unprocessable_entity
+    else
+      @news_item.ratings.create!(user: @current_user, score: params[:rating].to_i)
+      render json: { message: 'Rating created' }, status: :created
+    end
+  end
+
   def new
     @news_item = NewsItem.new
     @issue = ''

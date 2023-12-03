@@ -6,14 +6,42 @@ RSpec.describe MyNewsItemsController, type: :controller do
   let!(:representative) { create(:representative, name: 'Joe Biden') }
   let(:user) { create(:user) }
 
-  describe 'GET #search' do
-    before do
-      session[:current_user_id] = user.id
-    end
+  before do
+    session[:current_user_id] = user.id
+  end
 
+  describe 'GET #search' do
     it 'gives me some news about Joe Biden' do
       get :search, params: { representative_id: representative.id, issue: 'Unemployment' }
       expect(response).to be_successful
+    end
+  end
+
+  describe 'POST #create_rating' do
+    let(:news_item) { create(:news_item) }
+
+    context 'when the user has not already rated the news item' do
+      it 'creates a new rating and returns a success message' do
+        post :create_rating, params: { representative_id: representative.id, id: news_item.id, rating: 5 }
+
+        expect(response).to have_http_status(:created)
+        expect(JSON.parse(response.body)['message']).to eq('Rating created')
+        expect(Rating.where(user: user, news_item: news_item).count).to eq(1)
+      end
+    end
+
+    context 'when the user has already rated the news item' do
+      before do
+        Rating.create!(user: user, news_item: news_item, score: 5)
+      end
+
+      it 'does not create a new rating and returns an error message' do
+        post :create_rating, params: { representative_id: representative.id, id: news_item.id, rating: 5 }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(JSON.parse(response.body)['error']).to eq('You have already rated this news item')
+        expect(Rating.where(user: user, news_item: news_item).count).to eq(1)
+      end
     end
   end
 end
