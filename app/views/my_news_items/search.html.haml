@@ -1,3 +1,5 @@
+- rating_options = [['5 stars', 5], ['4 stars', 4], ['3 stars', 3], ['2 stars', 2], ['1 star', 1]]
+
 .row.mt-2
     .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
         %h1.text-center
@@ -8,35 +10,50 @@
         = @issue
         %br/
         %br/
-    - @news_items.each_with_index do |article, index|
+
+    = form_with(url: representative_my_news_item_new_path(@representative), local: true) do |form|
+        - @news_items.each_with_index do |article, index|
+            .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4.article
+                %label
+                    = form.radio_button :selected_article, index, class: 'article-selector'
+                    %b Title:
+                    %span.title= article[:title]
+                    %br/
+                    %b Link:
+                    %a.link{ href: article[:link], target: '_blank' }= article[:link]
+                    %br/
+                    %b Description:
+                    %span.description= article[:description]
+                    %br/
+
+        = form.hidden_field :title, id: 'hidden_title'
+        = form.hidden_field :link, id: 'hidden_link'
+        = form.hidden_field :description, id: 'hidden_description'
+
         .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-            %label
-            %input{ type: 'radio', name: 'Title', value: index }
-            %b Title:
-            = article.title
-            %br/
-            %b Link:
-            %a{ href: article.link, target: '_blank' }= article.link
-            %br/
-            %b Description:
-            = article.description
-            %br/
-    %br/
-    %br/
-    .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-        %label{ for: 'rating-dropdown' } Rating:
-        %select#rating-dropdown{ name: 'rating' }
-            %option{ value: '5' } 5 stars
-            %option{ value: '4' } 4 stars
-            %option{ value: '3' } 3 stars
-            %option{ value: '2' } 2 stars
-            %option{ value: '1' } 1 star
-    .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-        .clearfix.mt-3
-            .float-right
-            = link_to representative_news_items_path(@representative), class: 'btn btn-info' do
-                View news articles
-                %i.fas.fa-arrow-right
-            .float-left
-            = link_to representative_news_items_path(@representative), class: 'btn btn-info' do
-                Save
+            %label{ for: 'rating-dropdown' } Rating:
+            = form.select :rating, options_for_select(rating_options)
+
+        .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
+            .clearfix.mt-3
+                .float-right
+                    = link_to representative_news_items_path(@representative), class: 'btn btn-info' do
+                        View news articles
+                        %i.fas.fa-arrow-right
+                .float-left
+                    = form.submit 'Save', class: 'btn btn-info'
+
+:javascript
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.article-selector').forEach(function (radioButton) {
+            radioButton.addEventListener('change', function (e) {
+                if (e.target.checked) {
+                    var articleDiv = e.target.closest('.article');
+                    document.getElementById('hidden_title').value = articleDiv.querySelector('.title').textContent;
+                    document.getElementById('hidden_link').value = articleDiv.querySelector('.link').href;
+                    document.getElementById('hidden_description').value
+                    = articleDiv.querySelector('.description').textContent;
+                }
+            });
+        });
+    });
