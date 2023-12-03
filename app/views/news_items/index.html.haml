@@ -13,7 +13,7 @@
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
                     },
-                    url: 'news_items/'+newsItemId+'/create_rating',
+                    url: 'my_news_item/'+newsItemId+'/create_rating',
                     method: 'POST',
                     data: {
                         rating: newRating
@@ -82,6 +82,6 @@
                                     = link_to representative_news_item_path(item.representative.id, item.id),
                                     method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do
                                         %i.fas.fa-trash &nbsp;Delete
-                                %td 
+                                %td
                                     %button.btn.btn-primary.change-rating-button{ 'data-id': item.id }
                                         = item.rating
