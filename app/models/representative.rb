@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Representative < ApplicationRecord
-  has_many :news_items, dependent: :delete_all
+  has_many :news_items, dependent: :destroy
 
   def self.civic_api_to_representative_params(rep_info)
     reps = []

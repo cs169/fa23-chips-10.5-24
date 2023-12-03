@@ -33,8 +33,16 @@ class MyNewsItemsController < SessionController
   end
 
   def create
-    @news_item = NewsItem.new(news_item_params)
+    @news_item = NewsItem.new(
+      title:             params[:title],
+      link:              params[:link],
+      description:       params[:description],
+      representative_id: @representative.id
+    )
+
     if @news_item.save
+      @news_item.ratings.create(user: @current_user, score: params[:rating].to_i)
+
       redirect_to representative_news_item_path(@representative, @news_item),
                   notice: 'News item was successfully created.'
     else
