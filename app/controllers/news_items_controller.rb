@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NewsItemsController < ApplicationController
+class NewsItemsController < SessionController
   before_action :set_representative
   before_action :set_news_item, only: %i[show]
 
@@ -9,6 +9,20 @@ class NewsItemsController < ApplicationController
   end
 
   def show; end
+
+  def create_rating
+    if @current_user.nil?
+      render json: { error: 'You must be logged in to rate a news item' }, status: :unauthorized
+      return
+    end
+    @news_item = NewsItem.find(params[:news_item_id])
+    if Rating.where(user: @current_user, news_item: @news_item).exists?
+      render json: { error: 'You have already rated this news item' }, status: :unprocessable_entity
+    else
+      @news_item.ratings.create!(user: @current_user, score: params[:rating].to_i)
+      render json: { message: 'Rating created' }, status: :created
+    end
+  end
 
   private
 
@@ -21,4 +35,5 @@ class NewsItemsController < ApplicationController
   def set_news_item
     @news_item = NewsItem.find(params[:id])
   end
+
 end

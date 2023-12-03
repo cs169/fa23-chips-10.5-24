@@ -28,6 +28,9 @@ Rails.application.routes.draw do
     resources :representatives, only: [:index]
     resources :representatives do
         resources :news_items, only: %i[index show]
+        resources :news_items do
+            post 'create_rating', to: 'news_items#create_rating'
+        end
         get '/my_news_item/new' => 'my_news_items#new',
             :as                                                    => :new_my_news_item
         match '/my_news_item/new', to:  'my_news_items#create',
