@@ -8,10 +8,6 @@ class MyNewsItemsController < SessionController
   before_action :set_news_item, only: %i[edit update destroy]
 
   def create_rating
-    if @current_user.nil?
-      render json: { error: 'You must be logged in to rate a news item' }, status: :unauthorized
-      return
-    end
     @news_item = NewsItem.find(params[:id])
     if Rating.exists?(user: @current_user, news_item: @news_item)
       render json: { error: 'You have already rated this news item' }, status: :unprocessable_entity
