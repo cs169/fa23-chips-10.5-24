@@ -47,6 +47,7 @@ class MyNewsItemsController < SessionController
       title:             params[:title],
       link:              params[:link],
       description:       params[:description],
+      issue:            params[:issue],
       representative_id: @representative.id
     )
 

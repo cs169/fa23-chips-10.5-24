@@ -15,7 +15,7 @@
         - @news_items.each_with_index do |article, index|
             .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4.article
                 %label
-                    = form.radio_button :selected_article, index, class: 'article-selector'
+                    = form.radio_button :selected_article, index, class: 'article-selector', checked: index == 0
                     %b Title:
                     %span.title= article[:title]
                     %br/
@@ -26,9 +26,10 @@
                     %span.description= article[:description]
                     %br/
 
-        = form.hidden_field :title, id: 'hidden_title'
-        = form.hidden_field :link, id: 'hidden_link'
-        = form.hidden_field :description, id: 'hidden_description'
+        = form.hidden_field :title, id: 'hidden_title', value: @news_items[0][:title]
+        = form.hidden_field :link, id: 'hidden_link', value: @news_items[0][:link]
+        = form.hidden_field :description, id: 'hidden_description', value: @news_items[0][:description]
+        = form.hidden_field :issue, id: 'hidden_issue', value: @issue
 
         .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
             %label{ for: 'rating-dropdown' } Rating:
@@ -51,6 +52,7 @@
                     var articleDiv = e.target.closest('.article');
                     document.getElementById('hidden_title').value = articleDiv.querySelector('.title').textContent;
                     document.getElementById('hidden_link').value = articleDiv.querySelector('.link').href;
+                    document.getElementById('hidden_issue').value = '#{@issue}';
                     document.getElementById('hidden_description').value
                     = articleDiv.querySelector('.description').textContent;
                 }

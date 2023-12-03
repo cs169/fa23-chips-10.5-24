@@ -3,6 +3,6 @@
         .col-sm-2
             = label :issue, 'Issue', class: 'col-form-label'
         .col-sm-10
-            = select nil, :issue, issues_list, { include_blank: true }, class: 'form-control'
+            = select nil, :issue, issues_list, { include_blank: false }, class: 'form-control'
     .actions
         = f.submit 'Search', class: 'btn btn-primary'
