@@ -10,7 +10,6 @@ class NewsItemsController < ApplicationController
 
   def show; end
 
-
   private
 
   def set_representative
