@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'ostruct'
 
 RSpec.describe MyNewsItemsController, type: :controller do
   let!(:representative) { create(:representative, name: 'Joe Biden') }
@@ -11,8 +12,22 @@ RSpec.describe MyNewsItemsController, type: :controller do
   end
 
   describe 'GET #search' do
+    let(:news) { instance_double(News) }
+
+    before do
+      allow(News).to receive(:new).and_return(news)
+    end
+
     it 'gives me some news about Joe Biden' do
+      allow(news).to receive(:get_everything).and_return([OpenStruct.new({ title: 'Joe Biden', url: '2',
+description: '1' })])
       get :search, params: { representative_id: representative.id, issue: 'Unemployment' }
+      expect(response).to be_successful
+    end
+
+    it 'gives no news about Joe Biden' do
+      allow(news).to receive(:get_everything).and_return([])
+      get :search, params: { representative_id: representative.id, issue: 'Homelessness' }
       expect(response).to be_successful
     end
   end
