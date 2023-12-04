@@ -15,7 +15,7 @@
         - @news_items.each_with_index do |article, index|
             .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4.article
                 %label
-                    = form.radio_button :selected_article, index, class: 'article-selector', checked: index == 0
+                    = form.radio_button :selected_article, index, class: 'article-selector', checked: index.zero?
                     %b Title:
                     %span.title= article[:title]
                     %br/

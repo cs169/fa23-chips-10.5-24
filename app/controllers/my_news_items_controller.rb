@@ -41,10 +41,10 @@ class MyNewsItemsController < SessionController
       end
     end
 
-    if @news_items.empty?
-      flash.now[:error] = 'No news items found for this issue'
-      render :new
-    end
+    return unless @news_items.empty?
+
+    flash.now[:error] = 'No news items found for this issue'
+    render :new
   end
 
   def create
@@ -52,7 +52,7 @@ class MyNewsItemsController < SessionController
       title:             params[:title],
       link:              params[:link],
       description:       params[:description],
-      issue:            params[:issue],
+      issue:             params[:issue],
       representative_id: @representative.id
     )
 
