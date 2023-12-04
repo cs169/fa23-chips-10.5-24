@@ -40,6 +40,11 @@ class MyNewsItemsController < SessionController
         news.issue = @issue
       end
     end
+
+    if @news_items.empty?
+      flash.now[:error] = 'No news items found for this issue'
+      render :new
+    end
   end
 
   def create
